@@ -1,0 +1,15 @@
+package springmvc.model.dao;
+
+import java.util.List;
+
+import springmvc.model.EducationBackground;
+
+public interface EducationBackgroundDao {
+	
+	EducationBackground getEducationBackground(Integer E_id);
+	
+	List<EducationBackground> getEducationBackgroud();
+	
+	EducationBackground saveEducationBackground (EducationBackground educationBackground);
+
+}

@@ -1,0 +1,100 @@
+package springmvc.model;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "application_details")
+public class Application implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue
+	private Integer a_id;
+
+	@Column(name = "department", nullable = false)
+
+	private String department;
+
+	@Column(name = "program", nullable = false)
+
+	private String Program;
+
+	@Column(name = "term", nullable = false)
+	private String Term;
+
+	@ManyToMany(cascade ={CascadeType.MERGE , CascadeType.PERSIST})
+	@JoinColumn(name = "s_id")
+	private List<Student> student_info;
+
+	// @OneToOne
+	// Department Department;
+
+	// public void setDepartment(Department department) {
+	// Department = department;
+	// }
+
+	public Integer getD_id() {
+		return a_id;
+	}
+
+	public void setD_id(Integer a_id) {
+		this.a_id = a_id;
+	}
+
+	public Integer getA_id() {
+		return a_id;
+	}
+
+	public void setA_id(Integer a_id) {
+		this.a_id = a_id;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	public String getProgram() {
+		return Program;
+	}
+
+	public void setProgram(String program) {
+		Program = program;
+	}
+
+	public String getTerm() {
+		return Term;
+	}
+
+	public void setTerm(String term) {
+		Term = term;
+	}
+
+	public List<Student> getStudent_info() {
+		return student_info;
+	}
+
+	public void setStudent_info(List<Student> student_info) {
+		this.student_info = student_info;
+	}
+
+}

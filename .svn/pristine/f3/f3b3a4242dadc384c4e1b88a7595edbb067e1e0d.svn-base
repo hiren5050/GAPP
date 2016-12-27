@@ -1,0 +1,82 @@
+package springmvc.model.dao;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
+import org.testng.annotations.Test;
+
+import springmvc.model.Department;
+import springmvc.model.Student;
+
+@Test(groups = "UserDaoTest")
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
+public class UserDaoTest extends AbstractTransactionalTestNGSpringContextTests {
+
+	@Autowired
+	UserDao userDao;
+
+	@Autowired
+	DepartmentDao DepartmentDao;
+
+	@Autowired
+	ApplicationDao applicationDao;
+	
+	@Autowired
+	StudentDao studentDao;
+
+	//test purpose 
+	@Test
+	public void getUser() {
+		assert userDao.getUser(2).getEmail().equalsIgnoreCase("student1@localhost.localdomain");
+	}
+
+	@Test
+	public void getUsers() 
+	{
+		assert userDao.getUser().size() == 5;
+	}
+
+	//Department Testing 
+	@Test
+	public void getDepartments()
+	{
+		assert DepartmentDao.getDepartment().size() == 2;
+	}
+
+	//Application Testing
+	@Test
+	public void getApplication()
+	{
+
+		int count = 0;
+		List<Department> departments = DepartmentDao.getDepartment();
+		for(Department department : departments)
+		{
+			if(department.getApplication().getTerm().equals("Fall 2016"))
+			{
+				count++;
+				break;
+			}
+		}
+		
+		assert count == 1;
+	}
+	
+	
+	//Student testing
+	@Test
+	public void getStudent()
+	{
+		List<Student> students = studentDao.getStudent();
+		for(Student student : students)
+		{
+			if(student.getEmail().equals("student1@localhost.localdomain"))
+			{
+				assert	student.getApplication_details().size()==1;
+			}
+		}
+	}
+	
+}

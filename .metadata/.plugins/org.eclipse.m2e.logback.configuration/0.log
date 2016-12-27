@@ -1,0 +1,2 @@
+2016-08-24 12:50:05,101 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Installing C:\CS520\gapp\target\gapp.war to C:\Users\hiren\.m2\repository\Cs520\CS.example\0.0.1-SNAPSHOT\CS.example-0.0.1-SNAPSHOT.war
+2016-08-24 12:50:05,349 [Worker-18] INFO  o.e.m.c.i.embedder.EclipseLogger - Installing C:\CS520\gapp\pom.xml to C:\Users\hiren\.m2\repository\Cs520\CS.example\0.0.1-SNAPSHOT\CS.example-0.0.1-SNAPSHOT.pom

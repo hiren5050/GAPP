@@ -1,0 +1,15 @@
+@CHARSET "ISO-8859-1";
+
+  body { 
+  background: url(http://tska.com/wp-content/uploads/2011/06/CSLA-UAS_1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.panel-default {
+opacity: 0.9;
+margin-top:150px;
+}
+.form-group.last { margin-bottom:0px; }

@@ -1,0 +1,265 @@
+
+    create table ApplicationStatus_Status (
+        ApplicationStatus_As_id int4 not null,
+        status varchar(255) not null
+    );
+
+    create table Department_Program (
+        Department_d_id int4 not null,
+        programlist varchar(255)
+    );
+
+    create table additional_info (
+        ad_id int4 not null,
+        file varchar(255),
+        required boolean,
+        text varchar(255),
+        application_a_id int4,
+        primary key (ad_id)
+    );
+
+    create table application_details (
+        a_id int4 not null,
+        program varchar(255) not null,
+        term varchar(255) not null,
+        department varchar(255) not null,
+        primary key (a_id)
+    );
+
+    create table application_details_student_info (
+        application_details_a_id int4 not null,
+        student_info_s_id int4 not null
+    );
+
+    create table applicationstatus (
+        As_id int4 not null,
+        comment varchar(255),
+        u_date timestamp not null,
+        student_info_s_id int4,
+        primary key (As_id)
+    );
+
+    create table degree_type (
+        de_id int4 not null,
+        degree_type varchar(255) not null,
+        e_date timestamp not null,
+        major varchar(255) not null,
+        name varchar(255) not null,
+        s_date timestamp not null,
+        student_s_id int4,
+        primary key (de_id)
+    );
+
+    create table deparment (
+        d_id int4 not null,
+        name varchar(255),
+        application_a_id int4,
+        primary key (d_id)
+    );
+
+    create table education_background (
+        E_id int4 not null,
+        gpa float8,
+        gre int4,
+        tofel int4,
+        transcript varchar(255),
+        s_id int4,
+        primary key (E_id)
+    );
+
+    create table student_info (
+        s_id int4 not null,
+        cin int4,
+        dob timestamp not null,
+        email varchar(255) not null,
+        f_name varchar(255) not null,
+        gender char(1) not null,
+        l_name varchar(255) not null,
+        phone varchar(255) not null,
+        citizenship varchar(255) not null,
+        user_info_id int4,
+        primary key (s_id)
+    );
+
+    create table student_info_application_details (
+        student_info_s_id int4 not null,
+        application_details_a_id int4 not null
+    );
+
+    create table user_info (
+        id int4 not null,
+        email varchar(255) not null,
+        f_name varchar(255) not null,
+        l_name varchar(255) not null,
+        password varchar(255) not null,
+        deparment int4,
+        user_information int4,
+        primary key (id)
+    );
+
+    create table user_type (
+        u_id int4 not null,
+        user_type varchar(255)
+    );
+
+    alter table ApplicationStatus_Status 
+        add constraint FK_cwas0b3j2ue3bt6isfovm12v8 
+        foreign key (ApplicationStatus_As_id) 
+        references applicationstatus;
+
+    alter table Department_Program 
+        add constraint FK_rl628spyoqf3kv6tenfduxu5r 
+        foreign key (Department_d_id) 
+        references deparment;
+
+    alter table additional_info 
+        add constraint FK_r9gm6pstgl0lngacp7590kba5 
+        foreign key (application_a_id) 
+        references application_details;
+
+    alter table application_details_student_info 
+        add constraint FK_amw2j8oa0n3c5uba50ibqldqw 
+        foreign key (student_info_s_id) 
+        references student_info;
+
+    alter table application_details_student_info 
+        add constraint FK_dr23t1wbs6x1hdal4ry4mhuv4 
+        foreign key (application_details_a_id) 
+        references application_details;
+
+    alter table applicationstatus 
+        add constraint FK_ctrasti6haeuq7bvekm55ot5x 
+        foreign key (student_info_s_id) 
+        references student_info;
+
+    alter table degree_type 
+        add constraint FK_qa0wu7esxvfi6flmeqx3rc585 
+        foreign key (student_s_id) 
+        references student_info;
+
+    alter table deparment 
+        add constraint FK_qn6emb5164663krcyjald3y0y 
+        foreign key (application_a_id) 
+        references application_details;
+
+    alter table education_background 
+        add constraint FK_d8v4dtfjaqs84122dhxvsix7a 
+        foreign key (s_id) 
+        references student_info;
+
+    alter table student_info 
+        add constraint FK_1xa892u3dhp7ggywjq8uw388x 
+        foreign key (user_info_id) 
+        references user_info;
+
+    alter table student_info_application_details 
+        add constraint FK_9yq4t0q9qndo63yie2f9c9eh3 
+        foreign key (application_details_a_id) 
+        references application_details;
+
+    alter table student_info_application_details 
+        add constraint FK_43bcbvxt6kr4tpsdhs4rdkj4r 
+        foreign key (student_info_s_id) 
+        references student_info;
+
+    alter table user_info 
+        add constraint FK_iss312dikjy7i22l3pmc6rkjf 
+        foreign key (deparment) 
+        references deparment;
+
+    alter table user_info 
+        add constraint FK_c8vcjqf8ug2w3224lswlr7dri 
+        foreign key (user_information) 
+        references deparment;
+
+    alter table user_type 
+        add constraint FK_lgo9efjp54d768d6umqybavss 
+        foreign key (u_id) 
+        references user_info;
+
+    create sequence hibernate_sequence;
+
+    
+    INSERT INTO public.user_info(
+            id, email, f_name, l_name, password)
+    VALUES (1, 'admin@localhost.localdomain', 'admin', 'admin', 'abcd');
+
+	INSERT INTO public.user_info(
+            id, email, f_name, l_name, password)
+    VALUES (2, 'student1@localhost.localdomain', 'student1', 'student', 'abcd');
+
+  	INSERT INTO public.user_info(
+            id, email, f_name, l_name, password)
+    VALUES (3, 'student2@localhost.localdomain', 'student2', 'student', 'abcd');
+
+    INSERT INTO public.user_info(
+            id, email, f_name, l_name, password)
+    VALUES (4, 'staff1@localhost.localdomain', 'staff1', 'staff', 'abcd');
+    
+    INSERT INTO public.user_info(
+            id, email, f_name, l_name, password)
+    VALUES (5, 'staff2@localhost.localdomain', 'staff2', 'admin', 'abcd');
+    
+    
+    INSERT INTO public.user_type(
+            u_id, user_type)
+    VALUES (1, 'Adminstration');
+	INSERT INTO public.user_type(
+            u_id, user_type)
+    VALUES (2, 'Student');
+	INSERT INTO public.user_type(
+            u_id, user_type)
+    VALUES (3, 'Student');
+	INSERT INTO public.user_type(
+            u_id, user_type)
+    VALUES (4, 'Staff');
+	INSERT INTO public.user_type(
+            u_id, user_type)
+    VALUES (5, 'Staff');
+    
+
+    INSERT INTO public.student_info(
+            s_id, cin, dob, email, f_name, gender, l_name, phone, citizenship, 
+            user_info_id)
+    VALUES (1, null, 'now', 'student1@localhost.localdomain', 'hiren', 'M', 'Patel', '224-247-9207', 'Indian', 
+            1)
+            
+            
+    INSERT INTO public.application_details(
+            a_id, program, term, department)
+    VALUES (1, 'MS in Accounting', 'Fall 2016', 'Accounting Department');
+    
+    INSERT INTO public.application_details_student_info(
+            application_details_a_id, student_info_s_id)
+    VALUES (1, 1);
+
+
+    
+            
+    INSERT INTO public.deparment(
+            d_id, name, application_a_id)
+    VALUES (1, 'Accounting Department', 1);
+
+    INSERT INTO public.deparment(
+            d_id, name, application_a_id)
+    VALUES (2, 'Computer sciences Depatment ', 2);
+
+    INSERT INTO public.department_program(
+            department_d_id, programlist)
+    VALUES (1, 'MS in Accounting');
+	INSERT INTO public.department_program(
+            department_d_id, programlist)
+    VALUES (2, 'MS in Computer science');
+
+    INSERT INTO public.additional_info(
+            ad_id, file, required, text, application_a_id)
+    VALUES (1, null, 'true', 'GMAT', 1);
+
+    
+   INSERT INTO public.applicationstatus(
+            as_id, comment, u_date, student_info_s_id)
+    VALUES (1, 'Submit', 'now', 1);
+
+    INSERT INTO public.applicationstatus_status(
+            applicationstatus_as_id, status)
+    VALUES (1, 'Submited');
